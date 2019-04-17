@@ -12,4 +12,10 @@ function erf_inv($x)
 	return ($x<=>0)*sqrt(sqrt(pow($b,2)-$A*$l)-$b);
 }
 
+//Inverse probit function
+function probit_inv($prb=0, $sigma=1, $mu=0)
+{
+	return $mu+$sigma*M_SQRT2*erf_inv($prb);
+}
+
 ?>
