@@ -5,7 +5,7 @@
 
 function interval_map($val, $a, $b, $c, $d)
 {
-	return ($val-$a)*($c-$d)/($b-$a)+$c;
+	return ($val-$a)*($d-$c)/($b-$a)+$c;
 }
 
 ?>
