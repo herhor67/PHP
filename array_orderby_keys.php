@@ -3,7 +3,7 @@
 //sort two-dimensional array by columns
 //eg. array_orderby($arr, 'name', SORT_ASC, 'age', SORT_DESC, 'skill', SORT_DESC)
 
-function array_orderby()
+function array_orderby_keys()
 {
 	$args = func_get_args();
 	$data = array_shift($args);
