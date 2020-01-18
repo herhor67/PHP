@@ -13,6 +13,13 @@ function matrix_display(array &$array)
 	echo '</table><br>';
 }
 
+function matrix_dump(array &$array)
+{
+	echo '<pre>';
+	print_r($array);
+	echo '</pre><br>';
+}
+
 function matrix_flip_vertical(array &$array)
 {
 	$maxRow   = count($array)-1;
@@ -45,18 +52,31 @@ function matrix_transpose(array &$array)
 {
 	$maxRow = count($array)-1;
 	$maxCol = max(array_map('count', $array))-1;
-	for ($row=0; $row<=$maxRow; ++$row)
-		for ($col=$row+1; $col<=$maxCol; ++$col)
+	$square = min($maxRow, $maxCol);
+	for ($row=0; $row<=$square; ++$row)
+		for ($col=$row+1; $col<=$square; ++$col)
 			[$array[$row][$col], $array[$col][$row]] = [$array[$col][$row], $array[$row][$col]];
+	if ($maxCol > $maxRow)
+		for ($row=0; $row<=$maxRow; ++$row)
+			for ($col=$square+1; $col<=$maxCol; ++$col)
+			{
+				$array[$col][$row] = $array[$row][$col];
+				unset($array[$row][$col]);
+			}
+	if ($maxRow > $maxCol)
+		for ($row=$square+1; $row<=$maxRow; ++$row)
+		{
+			for ($col=0; $col<=$maxCol; ++$col)
+				$array[$col][$row] = $array[$row][$col];
+			unset($array[$row]);
+		}
 }
 
-function matrix_transpose_sec(array &$array)
+
+function matrix_antitranspose(array &$array)
 {
-	$maxRow = count($array)-1;
-	$maxCol = max(array_map('count', $array))-1;
-	for ($row=0; $row<=$maxRow; ++$row)
-		for ($col=$maxCol-$row-1; $col>=0; --$col)
-			[$array[$row][$col], $array[$maxRow-$col][$maxCol-$row]] = [$array[$maxRow-$col][$maxCol-$row], $array[$row][$col]];
+	matrix_flip_both($array);
+	matrix_transpose($array);
 }
 
 function matrix_rotate_clockwise(array &$array)
