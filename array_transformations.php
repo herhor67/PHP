@@ -70,25 +70,23 @@ function matrix_transpose(array &$array)
 				$array[$col][$row] = $array[$row][$col];
 			unset($array[$row]);
 		}
+	return true;
 }
 
 
 function matrix_antitranspose(array &$array)
 {
-	matrix_flip_both($array);
-	matrix_transpose($array);
+	return matrix_flip_both($array) && matrix_transpose($array);
 }
 
 function matrix_rotate_clockwise(array &$array)
 {
-	matrix_flip_vertical($array);
-	matrix_transpose($array);
+	return matrix_flip_vertical($array) && matrix_transpose($array);
 }
 
-function matrix_rotate_counterclockwise(array &$array)
+function matrix_rotate_anticlockwise(array &$array)
 {
-	matrix_transpose($array);
-	matrix_flip_vertical($array);
+	return matrix_transpose($array) && matrix_flip_vertical($array);
 }
 
 ?>
