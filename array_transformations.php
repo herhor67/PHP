@@ -22,10 +22,14 @@ function matrix_dump(array &$array)
 
 function matrix_flip_vertical(array &$array)
 {
-	$maxRow   = count($array)-1;
-	$maxRowIt = intdiv(count($array), 2)-1;
+	$maxRow   =  count($array) - 1;
+	$maxRowIt = (count($array)>>1) - 1;
 	for ($row=0; $row<=$maxRowIt; ++$row)
-		[$array[$row], $array[$maxRow-$row]] = [$array[$maxRow-$row], $array[$row]];
+	{
+		$temp = $array[$row];
+		$array[$row] = $array[$maxRow-$row];
+		$array[$maxRow-$row]] = $temp;
+	}
 	return true;
 }
 
@@ -39,10 +43,14 @@ function matrix_flip_horizontal(array &$array)
 
 function matrix_flip_both(array &$array)
 {
-	$maxRow   = count($array)-1;
-	$maxRowIt = intdiv(count($array), 2)-1;
+	$maxRow   =  count($array) - 1;
+	$maxRowIt = (count($array)>>1) - 1;
 	for ($row=0; $row<=$maxRowIt; ++$row)
-		[$array[$row], $array[$maxRow-$row]] = [array_reverse($array[$maxRow-$row]), array_reverse($array[$row])];
+	{
+		$temp = $array[$row];
+		$array[$row] = array_reverse($array[$maxRow-$row]);
+		$array[$maxRow-$row] = array_reverse($temp);
+	}
 	if (($maxRow&1) == 0)
 		$array[$maxRowIt+1] = array_reverse($array[$maxRowIt+1]);
 	return true;
@@ -55,7 +63,11 @@ function matrix_transpose(array &$array)
 	$square = min($maxRow, $maxCol);
 	for ($row=0; $row<=$square; ++$row)
 		for ($col=$row+1; $col<=$square; ++$col)
-			[$array[$row][$col], $array[$col][$row]] = [$array[$col][$row], $array[$row][$col]];
+		{
+			$temp = $array[$row][$col];
+			$array[$row][$col] = $array[$col][$row];
+			$array[$col][$row] = $temp;
+		}
 	if ($maxCol > $maxRow)
 		for ($row=0; $row<=$maxRow; ++$row)
 			for ($col=$square+1; $col<=$maxCol; ++$col)
@@ -70,9 +82,7 @@ function matrix_transpose(array &$array)
 				$array[$col][$row] = $array[$row][$col];
 			unset($array[$row]);
 		}
-	return true;
 }
-
 
 function matrix_antitranspose(array &$array)
 {
