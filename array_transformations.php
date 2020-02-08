@@ -28,7 +28,7 @@ function matrix_flip_vertical(array &$array)
 	{
 		$temp = $array[$row];
 		$array[$row] = $array[$maxRow-$row];
-		$array[$maxRow-$row]] = $temp;
+		$array[$maxRow-$row] = $temp;
 	}
 	return true;
 }
@@ -82,6 +82,7 @@ function matrix_transpose(array &$array)
 				$array[$col][$row] = $array[$row][$col];
 			unset($array[$row]);
 		}
+	return true;
 }
 
 function matrix_antitranspose(array &$array)
