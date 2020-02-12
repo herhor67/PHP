@@ -10,7 +10,7 @@ function textSize(float $size, float $angle, string $font, string $text)
 	return ['height' => $f[1] - $f[5], 'width' => $f[4] - $f[0]];
 }
 
-function extimagettftext(resource &$img, float $size, float $angle, int $x, int $y, int &$txtcolor, string $fontfile, string $text, int $align=ALIGN_LEFT, int &$shdwclr=null, int $shdwdx=0, int $shdwdy=0, int $shdwrds=0)
+function imagettftextalignborder(resource &$img, float $size, float $angle, int $x, int $y, int &$txtcolor, string $fontfile, string $text, int $align=ALIGN_LEFT, int &$shdwclr=null, int $shdwdx=0, int $shdwdy=0, int $shdwrds=0)
 {
 	if ($align)
 	{
